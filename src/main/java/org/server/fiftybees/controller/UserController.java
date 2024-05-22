@@ -3,6 +3,7 @@ package org.server.fiftybees.controller;
 import org.server.fiftybees.controller.dto.UserProfileDto;
 import org.server.fiftybees.controller.dto.UserRegisterDto;
 import org.server.fiftybees.domain.Authority;
+import org.server.fiftybees.exception.UserNotAuthorisedException;
 import org.server.fiftybees.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 @RestController
 @RequiredArgsConstructor
@@ -56,14 +58,14 @@ public class UserController {
 
     @GetMapping("/username/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public String getByUsername(@PathVariable String username) {
-        UserProfileDto userProfileDto = userService.getByUsername(username);
-        return "User " + userProfileDto.getUsername() + " is registered";
+    public UserProfileDto getByUsername(@PathVariable String username) {
+        return userService.getByUsername(username);
     }
 
     @GetMapping("/login")
     @ResponseStatus(HttpStatus.OK)
     public UserProfileDto login(Authentication authentication) {
+        if (authentication == null) throw new UserNotAuthorisedException("User not authorised");
         return userService.getByUsername(authentication.getName());
     }
 }

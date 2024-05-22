@@ -3,6 +3,7 @@ package org.server.fiftybees.service;
 import org.server.fiftybees.controller.dto.UserProfileDto;
 import org.server.fiftybees.controller.dto.UserRegisterDto;
 import org.server.fiftybees.domain.Authority;
+import org.springframework.security.core.Authentication;
 
 import java.util.List;
 

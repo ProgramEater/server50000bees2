@@ -41,6 +41,10 @@ public class User implements UserDetails {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Authority> authorities;
 
+    public boolean match_password(String password) {
+        return this.password.equals(password);
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;

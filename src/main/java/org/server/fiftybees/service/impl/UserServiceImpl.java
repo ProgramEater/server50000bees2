@@ -11,6 +11,7 @@ import org.server.fiftybees.exception.UserNotFoundException;
 import org.server.fiftybees.mapper.UserMapper;
 import org.server.fiftybees.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
